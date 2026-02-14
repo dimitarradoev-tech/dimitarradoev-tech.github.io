@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine</title>
+<style>
+    body {
+        background: #ffd6e8;
+        font-family: "Comic Sans MS", cursive;
+        text-align: center;
+        padding-top: 80px;
+        overflow: hidden;
+        color: #b30047;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    .btn {
+        padding: 15px 35px;
+        font-size: 1.5rem;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        margin: 20px;
+        transition: 0.2s;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #yes {
+        background-color: #ff4d88;
+        color: white;
+    }
+
+    #yes:hover {
+        background-color: #ff1a66;
+        transform: scale(1.1);
+    }
+
+    #no {
+        background-color: #fff;
+        color: #ff4d88;
+        position: absolute;
+    }
+
+    /* Gift box popup */
+    #giftBox {
+        display: none;
+        margin-top: 30px;
+        animation: pop 0.5s ease-out;
+    }
+
+    @keyframes pop {
+        0% { transform: scale(0.5); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    #giftBox img {
+        width: 250px;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    #giftMessage {
+        font-size: 2rem;
+        margin-top: 15px;
+        color: #ff1a66;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: fixed;
+        bottom: -20px;
+        color: #ff4d88;
+        font-size: 2rem;
+        animation: floatUp 5s linear infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 0.8; }
+        100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<h1>Will you be my Valentine? 🥺💘</h1>
+
+<button id="yes" class="btn">Yes 💖</button>
+<button id="no" class="btn">No 💔</button>
+
+<!-- Gift Box -->
+<div id="giftBox"> 
+    <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d" alt="Cute Dog"> 
+    <div id="giftMessage">You chose right! 🎁💗</div> 
+</div>
+
+<script>
+    const noBtn = document.getElementById("no");
+    const giftBox = document.getElementById("giftBox");
+
+    // Make the "No" button move on its own every second
+    function moveNoButton() {
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 120);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+    setInterval(moveNoButton, 60);
+
+    // Show gift when clicking "Yes"
+    document.getElementById("yes").addEventListener("click", () => { 
+        giftBox.style.display = "block"; 
+        noBtn.style.display = "none"; // hides the NO button 
+    });
+    
+    // Floating hearts generator
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 500);
+</script>
+
+</body>
+</html>
